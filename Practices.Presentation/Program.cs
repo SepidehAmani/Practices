@@ -1,4 +1,10 @@
 
+using Microsoft.EntityFrameworkCore;
+using Practices.Application.Services.Interfaces;
+using Practices.Domain.IRepositories;
+using Practices.Infrastructure.DBContext;
+using System;
+
 namespace Practices.Presentation
 {
     public class Program
@@ -13,6 +19,13 @@ namespace Practices.Presentation
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("PracticesDb")));
+
+            builder.Services.AddScoped<IBookRepository, IBookRepository>();
+            builder.Services.AddScoped<IAuthorRepository, IAuthorRepository>();
+            builder.Services.AddScoped<IBookService, IBookService>();
 
             var app = builder.Build();
 
