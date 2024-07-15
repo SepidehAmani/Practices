@@ -39,6 +39,6 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task<Author?> GetById(int id)
     {
-        return await _context.Authors.FirstOrDefaultAsync(e => e.Id == id);
+        return await _context.Authors.Where(e => e.Id == id).Include(e=> e.Books).FirstOrDefaultAsync();
     }
 }

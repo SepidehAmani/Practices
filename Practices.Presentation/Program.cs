@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Practices.Application.Mappings.Profiles;
 using Practices.Application.Services.Implementations;
 using Practices.Application.Services.Interfaces;
 using Practices.Domain.IRepositories;
@@ -24,6 +25,8 @@ namespace Practices.Presentation
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(GeneralMappingProfile));
+
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("PracticesDb")));
 
@@ -31,6 +34,7 @@ namespace Practices.Presentation
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IBookService, BookService>();
+            
 
             var app = builder.Build();
 
