@@ -1,6 +1,8 @@
-﻿namespace Practices.Domain.IRepositories;
+﻿using Practices.Domain.Entities;
 
-public interface IAuthorRepository
+namespace Practices.Domain.IRepositories;
+
+public interface IAuthorRepository : IBaseRepository<Author>
 {
 
 }

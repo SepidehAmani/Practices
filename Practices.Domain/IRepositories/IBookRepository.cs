@@ -1,6 +1,8 @@
-﻿namespace Practices.Domain.IRepositories;
+﻿using Practices.Domain.Entities;
 
-public interface IBookRepository
+namespace Practices.Domain.IRepositories;
+
+public interface IBookRepository : IBaseRepository<Book>
 {
 
 }

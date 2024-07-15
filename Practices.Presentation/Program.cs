@@ -1,8 +1,12 @@
 
 using Microsoft.EntityFrameworkCore;
+using Practices.Application.Services.Implementations;
 using Practices.Application.Services.Interfaces;
 using Practices.Domain.IRepositories;
+using Practices.Domain.UnitOfWorkInterface;
 using Practices.Infrastructure.DBContext;
+using Practices.Infrastructure.Repositories;
+using Practices.Infrastructure.UnitOfWorkImplementation;
 using System;
 
 namespace Practices.Presentation
@@ -23,9 +27,10 @@ namespace Practices.Presentation
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("PracticesDb")));
 
-            builder.Services.AddScoped<IBookRepository, IBookRepository>();
-            builder.Services.AddScoped<IAuthorRepository, IAuthorRepository>();
-            builder.Services.AddScoped<IBookService, IBookService>();
+            builder.Services.AddScoped<IBookRepository, BookRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IBookService, BookService>();
 
             var app = builder.Build();
 
