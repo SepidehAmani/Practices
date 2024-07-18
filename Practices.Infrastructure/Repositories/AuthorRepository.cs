@@ -41,4 +41,9 @@ public class AuthorRepository : IAuthorRepository
     {
         return await _context.Authors.Where(e => e.Id == id).Include(e=> e.Books).FirstOrDefaultAsync();
     }
+
+    public async Task<Author?> GetByName(string name,CancellationToken cancellation)
+    {
+        return await _context.Authors.FirstOrDefaultAsync(e => e.Name == name, cancellation);
+    }
 }

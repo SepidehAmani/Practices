@@ -15,7 +15,13 @@ public class BookRepository : IBookRepository
 
     public void Add(Book entity)
     {
-        _context.Add(entity);
+        throw new Exception("You're using the wrong repo method for saving books");
+    }
+
+    public void AddBook(int authorId, Book book)
+    {
+        _context.Add(book);
+        _context.Entry(book).Property("AuthorId").CurrentValue = authorId;
     }
 
     public void Update(Book entity)
